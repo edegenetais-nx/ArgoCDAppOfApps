@@ -1,0 +1,32 @@
+{
+    "apiVersion": "argoproj.io/v1alpha1",
+    "kind": "Application",
+    "metadata": {
+        "name": "helmargo",
+        "namespace": "argocd"
+    },
+    "spec": {
+        "destination": {
+            "namespace": "guestbook",
+            "server": "https://kubernetes.default.svc"
+        },
+        "syncPolicy": {
+            "automated": {
+                "prune": true
+            }
+        },
+        "project": "my-project",
+        "source": {
+            "path": ".",
+            "repoURL": "https://github.com/edegenetais-nx/DemoHelmChart",
+            "targetRevision": "HEAD",
+            "helm": {
+                "releaseName": "helmargo",
+                "valueFiles": [
+                    "values.yaml",
+                    "dev-values.yaml"
+                ]
+            }
+        }
+    }
+}

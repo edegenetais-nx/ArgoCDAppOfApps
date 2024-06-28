@@ -1,0 +1,23 @@
+{
+    "apiVersion": "argoproj.io/v1alpha1",
+    "kind": "Application",
+    "metadata": {
+        "name": "helmargo-cfg",
+        "namespace": "argocd"
+    },
+    "spec": {
+        "destination": {
+            "namespace": "guestbook",
+            "server": "https://kubernetes.default.svc"
+        },
+        "syncPolicy": {
+            "automated": {"prune": true }
+        },
+        "project": "my-project",
+        "source": {
+            "path": ".",
+            "repoURL": "https://github.com/edegenetais-nx/DemoHelmConfig",
+            "targetRevision": "HEAD"
+        }
+    }
+}
